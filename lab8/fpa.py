@@ -6,7 +6,7 @@ import math
 fs=5000
 fp=2000
 
-N=100
+N=1000
 
 n = np.arange(0,N)
 
@@ -18,6 +18,9 @@ hd=np.sin(np.pi*m)/(np.pi*m) - np.sin(0.6*np.pi*m)/(np.pi*m)
 plt.stem(hd)
 plt.show()
 
+plt.title('Resposta em Frequência N=' + str(N))
+plt.ylabel('Amplitude')
+plt.xlabel('Frequencia (rad/sample)')
 w,h=signal.freqz(hd,1)
 plt.plot(w/np.pi,abs(h))
 plt.show()
