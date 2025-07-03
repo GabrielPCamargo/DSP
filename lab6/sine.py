@@ -10,9 +10,9 @@ t2 = np.arange(0, 2 + 1/2, 1/2)   # Vetor de tempo com Ts=1/2s
 freq_sinal = 1
 
 # Sinais senoidais
-seno_discreto = np.sin(2 * np.pi * freq_sinal * t + np.pi/2)
-seno_discreto1 = np.sin(2 * np.pi * freq_sinal * t1 + np.pi/2)
-seno_discreto2 = np.sin(2 * np.pi * freq_sinal * t2 + np.pi/2)
+seno_discreto = np.sin(2 * np.pi * freq_sinal * t)
+seno_discreto1 = np.sin(2 * np.pi * freq_sinal * t1)
+seno_discreto2 = np.sin(2 * np.pi * freq_sinal * t2)
 
 # Criação dos gráficos
 plt.figure(figsize=(10, 8))
@@ -34,6 +34,7 @@ plt.ylabel('Ts=1/10s')
 plt.subplot(4, 1, 4)
 plt.stem(t2, seno_discreto2, '--')
 plt.ylabel('Ts=1/2s')
+plt.ylim(-1, 1)
 
 plt.tight_layout()  # Ajusta o espaçamento entre os subplots
 plt.show()

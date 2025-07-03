@@ -68,10 +68,23 @@ plt.tight_layout()
 plt.show()
 
 # Tocar áudios
-print("Reproduzindo áudio original...")
-sd.play(wave.astype(np.float32) / np.max(np.abs(wave)), samplerate=fs)
-sd.wait()
+# print("Reproduzindo áudio original...")
+# sd.play(wave.astype(np.float32) / np.max(np.abs(wave)), samplerate=fs)
+# sd.wait()
 
-print("Reproduzindo áudio filtrado...")
-sd.play(filtrado.astype(np.float32) / np.max(np.abs(filtrado)), samplerate=fs)
-sd.wait()
+# print("Reproduzindo áudio filtrado...")
+# sd.play(filtrado.astype(np.float32) / np.max(np.abs(filtrado)), samplerate=fs)
+# sd.wait()
+
+
+from scipy.io.wavfile import write
+
+# Normaliza para evitar distorção (clipping)
+filtrado_norm = filtrado / np.max(np.abs(filtrado))
+
+# Converte para int16 (formato WAV)
+filtrado_int16 = np.int16(filtrado_norm * 32767)
+
+# Salva o arquivo
+output_filename = 'chorus_filtrado_cheby1.wav'
+write(output_filename, fs, filtrado_int16)

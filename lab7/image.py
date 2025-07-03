@@ -30,7 +30,7 @@ if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
 # Load image
-imagem = plt.imread('./im.jpg', 'jpg')
+imagem = plt.imread('./verde.jpg', 'jpg')
 grayscale = rgb2gray(imagem)
 Im_gray = np.round(grayscale * 255)
 

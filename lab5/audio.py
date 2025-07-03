@@ -5,6 +5,7 @@ import sounddevice as sd
 import numpy as np
 import scipy.signal as signal
 from scipy.signal import tf2zpk
+from scipy.io.wavfile import write
 
 
 filename = './chorus.wav'
@@ -84,14 +85,14 @@ plt.grid()
 
 plt.subplot(3, 1, 2)
 plt.plot(tempo, saida1)
-plt.title("Filtro cheby2 - janela 0.8)")
+plt.title("Filtro cheby2 - fc = 0.8")
 plt.xlabel("Tempo [s]")
 plt.ylabel("Amplitude")
 plt.grid()
 
 plt.subplot(3, 1, 3)
 plt.plot(tempo, saida2)
-plt.title("Filtro cheby2 - janela 0.5)")
+plt.title("Filtro cheby2 - fc = 0.5")
 plt.xlabel("Tempo [s]")
 plt.ylabel("Amplitude")
 plt.grid()
@@ -105,4 +106,13 @@ print("Tocando sinal filtrado...")
 # sd.play(saida, fs)
 # sd.wait()
 
+saida1_norm = saida1 / np.max(np.abs(saida1))
+saida2_norm = saida2 / np.max(np.abs(saida2))
 
+# Converte para int16 para salvar
+saida1_int = np.int16(saida1_norm * 32767)
+saida2_int = np.int16(saida2_norm * 32767)
+
+# Salva os arquivos
+write("saida_filtro_fc_0.8.wav", fs, saida1_int)
+write("saida_filtro_fc_0.5.wav", fs, saida2_int)
